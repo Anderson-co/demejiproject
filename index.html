@@ -1,76 +1,21 @@
 <!DOCTYPE html>
-<!--
-  CSC 405 PROJECT — RESPONSIVE VERSION
-  Works on both MOBILE PHONES and DESKTOP computers.
-
-  KEY CONCEPT — RESPONSIVE DESIGN:
-  Responsive design means the page automatically adjusts its layout
-  depending on the screen size of the device viewing it.
-  The main tools used are:
-    1. <meta name="viewport"> tag  — tells mobile browsers to use the real screen width
-    2. CSS media queries           — apply different styles at different screen sizes
-    3. overflow-x: auto            — allows wide tables to scroll horizontally on small screens
--->
-
 <html lang="en">
-
-<!-- ============================================================
-     HEAD SECTION
-     Metadata and all CSS styling lives here.
-     ============================================================ -->
 <head>
-
-  <!-- Character encoding: supports all text characters worldwide -->
   <meta charset="UTF-8">
-
-  <!--
-    VIEWPORT META TAG — THE MOST IMPORTANT TAG FOR MOBILE SUPPORT
-    Without this, mobile browsers zoom out and shrink the whole page.
-    - width=device-width  → use the actual screen width of the device
-    - initial-scale=1.0   → do not zoom in or out at page load
-  -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- Browser tab title — Requirement: "csc 405 project" -->
   <title>csc 405 project</title>
-
-  <!--
-    ============================================================
-    CSS STYLES
-    ============================================================
-  -->
   <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    /*
-      CSS RESET / BOX MODEL FIX
-      box-sizing: border-box makes width/padding calculations predictable.
-      This is standard practice in modern responsive web development.
-    */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    /*
-      BODY — BASE STYLES (applies to ALL screen sizes)
-      - background-color: green   → Requirement ii
-      - margin: auto              → Requirement iii (centers the page block)
-      - text-align: right         → Requirement iii (text aligned to right)
-      - padding: 20px             → spacing so content does not touch screen edges
-    */
     body {
-      background-color: green;         /* Requirement ii: green background */
-      margin-right: auto;              /* Requirement iii: right margin auto */
-      margin-left: auto;               /* Centers the whole content block */
-      max-width: 1100px;               /* Max width for large desktop screens */
-      padding: 20px;                   /* Space on all sides */
+      background-color: green;
+      max-width: 1100px;
+      margin: auto;
+      padding: 20px;
       font-family: Georgia, serif;
       color: white;
-      text-align: right;               /* Requirement iii: right-aligned text */
+      text-align: right;
     }
 
-    /* ---- HEADING STYLES ---- */
     h1 {
       font-size: 2.5em;
       text-decoration: underline;
@@ -79,57 +24,18 @@
       margin-bottom: 8px;
     }
 
-    p.subtitle {
-      font-size: 1em;
-      color: #d4f5d4;
-      margin-bottom: 25px;
-    }
+    p.subtitle { font-size: 1em; color: #d4f5d4; margin-bottom: 25px; }
 
     h2 {
       font-size: 1.4em;
       border-bottom: 2px solid #FFD700;
       padding-bottom: 6px;
-      margin-top: 30px;
-      margin-bottom: 12px;
+      margin: 30px 0 12px;
     }
 
-    /*
-      TABLE WRAPPER DIV
-      This is the KEY technique for making wide tables work on mobile.
-      - overflow-x: auto  → if the table is wider than the screen,
-                            a horizontal scrollbar appears so the user
-                            can scroll the table without breaking the page.
-      - -webkit-overflow-scrolling: touch → smooth scrolling on iOS (iPhone/iPad)
-    */
-    .table-wrapper {
-      width: 100%;
-      overflow-x: auto;                /* Horizontal scroll on small screens */
-      -webkit-overflow-scrolling: touch; /* Smooth scroll on iPhone/iPad */
-      margin-bottom: 10px;
-      border-radius: 6px;
-    }
-
-    /*
-      Scroll hint: shown only on mobile via media query below.
-      Tells the user they can swipe the table sideways.
-    */
-    .scroll-hint {
-      font-size: 0.78em;
-      color: #b6f0b6;
-      margin-bottom: 12px;
-      display: none;                   /* Hidden by default on desktop */
-    }
-
-    /*
-      TABLE STYLES
-      - min-width: 600px → table will NOT shrink below 600px wide.
-        Instead, the wrapper div will scroll horizontally.
-        This keeps the table readable on all devices.
-    */
     table {
       width: 100%;
-      min-width: 600px;                /* Prevents unreadable squishing */
-      border-collapse: collapse;       /* Removes double borders */
+      border-collapse: collapse;
       background-color: #006400;
       box-shadow: 0 4px 12px rgba(0,0,0,0.4);
     }
@@ -141,7 +47,6 @@
       border: 2px solid #00aa00;
       font-size: 0.9em;
       text-align: center;
-      white-space: nowrap;             /* Prevents club names from wrapping/breaking */
     }
 
     td {
@@ -150,42 +55,38 @@
       color: white;
       font-size: 0.95em;
       text-align: center;
-      white-space: nowrap;
     }
 
-    tr:hover td {
-      background-color: #005500;
-    }
+    tr:hover td { background-color: #005500; }
 
-    /* ---- SOCIAL MEDIA LINKS ---- */
     .links-container {
       margin-top: 10px;
       padding: 15px 20px;
       background-color: #004400;
       border-radius: 8px;
-      display: flex;                   /* Flexbox: arranges children in a row */
-      flex-wrap: wrap;                 /* Allows wrapping to next line on small screens */
-      gap: 12px;                       /* Space between each link button */
-      justify-content: flex-end;       /* Aligns links to the right side */
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
     }
 
     a {
       text-decoration: none;
       color: #FFD700;
       font-weight: bold;
-      font-size: 1.05em;
-      padding: 8px 16px;
-      border: 2px solid #FFD700;
-      border-radius: 6px;
+      font-size: 0.78em;
+      padding: 4px 10px;
+      border: 1.5px solid #FFD700;
+      border-radius: 5px;
       transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
 
-    a:hover {
-      background-color: #FFD700;
-      color: #003300;
-    }
+    a span.icon { font-size: 0.9em; }
 
-    /* ---- FOOTER ---- */
+    a:hover { background-color: #FFD700; color: #003300; }
+
     footer {
       margin-top: 40px;
       font-size: 0.8em;
@@ -193,195 +94,44 @@
       border-top: 1px solid #00aa00;
       padding-top: 10px;
     }
-
-
-    /* ============================================================
-       MEDIA QUERIES — THE ENGINE OF RESPONSIVE DESIGN
-
-       A media query says: "Apply these CSS rules ONLY when the
-       screen width matches this condition."
-
-       Syntax:
-         @media (max-width: Xpx) { ... }
-         = "Apply these rules only on screens X pixels wide or LESS"
-
-       Common breakpoints used by developers:
-         1024px = laptops / small desktops
-          768px = tablets, large phones (landscape)
-          480px = small mobile phones (portrait)
-       ============================================================ */
-
-
-    /*
-      TABLET AND MOBILE — screens 768px wide or narrower
-    */
-    @media (max-width: 768px) {
-
-      body {
-        padding: 15px;                 /* Slightly less padding to save space */
-      }
-
-      /* Smaller heading so it fits nicely on one line */
-      h1 {
-        font-size: 1.8em;
-        letter-spacing: 1px;
-      }
-
-      h2 {
-        font-size: 1.2em;
-      }
-
-      /*
-        Show the swipe hint on mobile only.
-        Helps users discover that the table can be scrolled sideways.
-      */
-      .scroll-hint {
-        display: block;
-      }
-
-      /*
-        Stack social link buttons vertically on mobile
-        so they are easy to tap with a finger.
-      */
-      .links-container {
-        flex-direction: column;        /* Stack items top-to-bottom */
-        align-items: flex-end;         /* Keep them right-aligned */
-      }
-
-      a {
-        font-size: 1em;
-        text-align: center;
-      }
-
-    } /* END @media 768px */
-
-
-    /*
-      SMALL MOBILE PHONES — screens 480px wide or narrower
-      (e.g. iPhone SE, small Android phones held upright)
-    */
-    @media (max-width: 480px) {
-
-      body {
-        padding: 10px;
-      }
-
-      h1 {
-        font-size: 1.4em;
-        letter-spacing: 0;
-      }
-
-      p.subtitle {
-        font-size: 0.85em;
-      }
-
-      /* Smaller padding in table cells to fit more on screen */
-      th, td {
-        padding: 8px 5px;
-        font-size: 0.8em;
-      }
-
-    } /* END @media 480px */
-
   </style>
 </head>
-
-<!-- ============================================================
-     BODY — All visible page content
-     ============================================================ -->
 <body>
 
-  <!-- MAIN HEADING — Requirement: head = "CSC 405" -->
   <h1>CSC 405</h1>
-
   <p class="subtitle">Premier League &mdash; Top 9 Clubs &amp; Points Table (2025/26)</p>
 
-  <!--
-    ============================================================
-    TABLE SECTION — Requirement i
-    9 columns x 2 rows: Club names (Row 1) + Points (Row 2)
+  <table>
+    <thead>
+      <tr>
+        <th>Arsenal FC</th><th>Man City</th><th>Aston Villa</th>
+        <th>Man United</th><th>Chelsea FC</th><th>Liverpool FC</th>
+        <th>Brentford</th><th>Bournemouth</th><th>Everton FC</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>61 pts</td><td>56 pts</td><td>51 pts</td>
+        <td>48 pts</td><td>45 pts</td><td>45 pts</td>
+        <td>40 pts</td><td>38 pts</td><td>37 pts</td>
+      </tr>
+    </tbody>
+  </table>
 
-    MOBILE STRATEGY EXPLAINED:
-    The <div class="table-wrapper"> wraps the table.
-    On desktop: table fits normally, wrapper is invisible.
-    On mobile: if table is wider than screen, the wrapper shows
-    a scrollbar so the user can slide the table — without
-    the rest of the page breaking or shrinking.
-    ============================================================
-  -->
-
-  <!-- Scroll hint — only visible on screens 768px or smaller -->
-  <p class="scroll-hint">&#8592; Swipe table left / right to see all clubs &#8594;</p>
-
-  <!-- TABLE WRAPPER: key for mobile horizontal scroll -->
-  <div class="table-wrapper">
-
-    <table>
-
-      <!-- ROW 1: Club Names (Table Header Row) -->
-      <thead>
-        <tr>
-          <th>Arsenal FC</th>
-          <th>Man City</th>
-          <th>Aston Villa</th>
-          <th>Man United</th>
-          <th>Chelsea FC</th>
-          <th>Liverpool FC</th>
-          <th>Brentford</th>
-          <th>Bournemouth</th>
-          <th>Everton FC</th>
-        </tr>
-      </thead>
-
-      <!-- ROW 2: Points (Table Body Row) -->
-      <tbody>
-        <tr>
-          <td>61 pts</td>   <!-- Arsenal -->
-          <td>56 pts</td>   <!-- Manchester City -->
-          <td>51 pts</td>   <!-- Aston Villa -->
-          <td>48 pts</td>   <!-- Manchester United -->
-          <td>45 pts</td>   <!-- Chelsea -->
-          <td>45 pts</td>   <!-- Liverpool -->
-          <td>40 pts</td>   <!-- Brentford -->
-          <td>38 pts</td>   <!-- Bournemouth -->
-          <td>37 pts</td>   <!-- Everton -->
-        </tr>
-      </tbody>
-
-    </table>
-
-  </div>
-  <!-- END TABLE WRAPPER -->
-
-  <!--
-    ============================================================
-    SOCIAL MEDIA LINKS — Requirement iv
-    YouTube, Facebook, Twitter
-    Desktop: side by side  |  Mobile: stacked vertically
-    ============================================================
-  -->
   <h2>Social Media Links</h2>
-
   <div class="links-container">
-
     <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer">
-      &#9654; YouTube
+      <span class="icon">&#9654;</span> YouTube
     </a>
-
     <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
-      &#128248; Facebook
+      <span class="icon">&#128248;</span> Facebook
     </a>
-
     <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer">
-      &#128038; Twitter
+      <span class="icon">&#128038;</span> Twitter
     </a>
-
   </div>
 
-  <!-- FOOTER -->
-  <footer>
-    CSC 405 Project &mdash; Premier League Data &mdash; 2025/2026 Season
-  </footer>
+  <footer>CSC 405 Project &mdash; Premier League Data &mdash; 2025/2026 Season</footer>
 
 </body>
 </html>
